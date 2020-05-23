@@ -654,7 +654,8 @@ namespace Calculator
             //    resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 2, 2);
 
             //    resultbox_Copy.Text = "(" + resultbox_Copy.Text + ")" + "yroot";
-            //}
+            //}  comentarebi davamatet test 
+            //comments has been added
 
             if (numburbuttonpressed||nth==false)
             {
