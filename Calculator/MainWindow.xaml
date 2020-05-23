@@ -1,0 +1,121 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="450" Width="675" ResizeMode="NoResize">
+    <Canvas>
+        <Grid Canvas.Left="10" Canvas.Top="26" Width="638" Height="368">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <TextBox x:Name="resultbox" Text="0"   FontSize="20" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,20,5,0" BorderThickness="1,0,1,1"  RenderTransformOrigin="0.503,0.425"/>
+
+            <Button x:Name="tt" Grid.Row="1" Grid.Column="0" FontSize="40" Margin="5" Visibility="Visible"></Button>
+            <Button Grid.Row="1" Grid.Column="1" FontSize="40" Margin="5"></Button>
+
+
+
+            <Button x:Name="ln" Grid.Row="1" Grid.Column="2" FontSize="25" Margin="5" Click="Ln_Click">ln</Button>
+            <Button x:Name="lft" Grid.Row="1" Grid.Column="3" Padding="7" FontSize="35" Margin="5" Click="Lft_Click">&#8317;</Button>
+            <Button x:Name="right" Grid.Row="1" Grid.Column="4" Padding="7" FontSize="35" Margin="5" Click="Right_Click">&#8318;</Button>
+            <Button Grid.Row="2" Grid.Column="0" FontSize="40" Margin="5"></Button>
+            <Button x:Name="sinh" Grid.Row="2" Grid.Column="1" FontSize="25" Margin="5" Click="Sinh_Click">sinh</Button>
+            <Button x:Name="sin" Grid.Row="2" Grid.Column="2" FontSize="25" Margin="5" RenderTransformOrigin="0.333,0.212" Click="Sin_Click" >sin</Button>
+            <Button x:Name="twopower" Grid.Row="2" Grid.Column="3" FontSize="25" Margin="5" Click="Twopower_Click">x²</Button> <!--x symbol + alt +0178-->
+            <Button x:Name="fact" Grid.Row="2" Grid.Column="4" FontSize="25" Margin="5" Click="Fact_Click">n!</Button>
+            <Button Grid.Row="3" Grid.Column="0" FontSize="15" Margin="5"></Button>
+            <Button x:Name="cosh" Grid.Row="3" Grid.Column="1" FontSize="23" Margin="5" Click="Cosh_Click">cosh</Button>
+            <Button x:Name="cos" Grid.Row="3" Grid.Column="2" FontSize="25" Margin="5" Click="Cos_Click">cos</Button>
+            <Button x:Name="npow" Grid.Row="3" Grid.Column="3" FontSize="25" Margin="5" Click="Npow_Click">x&#x02B8;</Button>
+            <Button x:Name="nthroot" Grid.Row="3" Grid.Column="4" FontSize="25" Margin="5" Click="Nthroot_Click">&#x02B8;&#8730;x</Button>
+            <Button x:Name="pi" Grid.Row="4"    Grid.Column="0" FontSize="25" Margin="5" Click="Pi_Click">&#960;</Button>
+            <Button x:Name="tanh" Grid.Row="4" Grid.Column="1" FontSize="24" Margin="5" Click="Tanh_Click">tanh</Button>
+            <Button x:Name="tan" Grid.Row="4" Grid.Column="2" FontSize="25" Margin="5" Click="Tan_Click">tan</Button>
+            <Button x:Name="powthree" Grid.Row="4" Grid.Column="3" FontSize="25" Margin="5" Click="Powthree_Click">x³</Button>
+            <Button x:Name="cuberoot" Grid.Row="4" Grid.Column="4" FontSize="25" Margin="5" Click="Cuberoot_Click">&#8731;x</Button>
+            <Button Grid.Row="5" Grid.Column="0" FontSize="25" Margin="5" />
+            <!--&#119910;-->
+            <Button x:Name="exp" Grid.Row="5" Grid.Column="1" FontSize="25" Margin="5" Click="Exp_Click">Exp</Button>
+            <Button Grid.Row="5" Grid.Column="2" FontSize="23" Margin="5">Mod</Button>
+            <Button x:Name="log" Grid.Row="5" Grid.Column="3" FontSize="25" Margin="5" Click="Log_Click">log</Button>
+            <Button x:Name="powten" Grid.Row="5" Grid.Column="4" FontSize="25" Margin="5" Click="Powten_Click">10&#x02E3;</Button>
+
+            <Button x:Name="backspace" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="-7" Grid.Row="1" Grid.Column="5"  FontSize="40" Margin="5" Content="&#8592;" Click="Backspace_Click"/>
+            <Button x:Name="clearentrance" Grid.Row="1" Grid.Column="6" FontSize="25" Margin="5" Click="Clearentrance_Click">CE</Button>
+            <Button x:Name="clear" Grid.Row="1" Grid.Column="7" FontSize="25" Margin="5" Click="Clear_Click">C</Button>
+            <Button x:Name="plmin" Grid.Row="1" Grid.Column="8" FontSize="25" Margin="5" Click="Button_Click_1">+-</Button>
+            <Button x:Name="perc" Grid.Row="2" Grid.Column="9" FontSize="25" Margin="5" Click="Perc_Click">%</Button>
+            <Button x:Name="reciproc" Grid.Row="3" Grid.Column="9" FontSize="25" Margin="5" Click="Reciproc_Click">1/x</Button>
+            <Button x:Name="equals" Grid.Row="4" Grid.Column="9" FontSize="40" Margin="5" Grid.RowSpan="2" Click="Equals_Click">=</Button>
+
+            <Button x:Name="_7" Grid.Row="2" Grid.Column="5" FontSize="25" Margin="5" Click="Button_Click">7</Button>
+            <Button x:Name="_4" Grid.Row="3" Grid.Column="5" FontSize="25" Margin="5" Click="Button_Click">4</Button>
+            <Button x:Name="_1" Grid.Row="4" Grid.Column="5" FontSize="25" Margin="5" Click="Button_Click">1</Button>
+            <Button x:Name="_8" Grid.Row="2" Grid.Column="6" FontSize="25" Margin="5" Click="Button_Click">8</Button>
+            <Button x:Name="sqrt" Grid.Row="1" Grid.Column="9" FontSize="25" Margin="5" Click="Sqrt_Click">&#8730;</Button>
+            <Button x:Name="_5" Grid.Row="3" Grid.Column="6" FontSize="25" Margin="5" Click="Button_Click">5</Button>
+            <Button x:Name="_2" Grid.Row="4" Grid.Column="6" FontSize="25" Margin="5" Click="Button_Click">2</Button>
+            <Button x:Name="_9" Grid.Row="2" Grid.Column="7" FontSize="25" Margin="5" Click="Button_Click">9</Button>
+            <Button x:Name="_6" Grid.Row="3" Grid.Column="7" FontSize="25" Margin="5" Click="Button_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                        <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 6</Button>
+            <Button x:Name="_0" Grid.Row="5" Grid.Column="5" FontSize="25" Grid.ColumnSpan="2" Margin="5" Click="Button_Click">0</Button>
+            <Button x:Name="dec" Grid.Row="5" Grid.Column="7" FontSize="25" Margin="5" Click="Button_Click_2">,</Button>
+            <Button x:Name="_3" Grid.Row="4" Grid.Column="7" FontSize="25" Margin="5" Click="Button_Click">3</Button>
+            <Button x:Name="div" Grid.Row="2" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click" >/</Button>
+            <Button x:Name="pow" Grid.Row="3" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click">*</Button>
+            <Button x:Name="plus" Grid.Row="4" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click">+</Button>
+            <Button x:Name="min" Grid.Row="5" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click">-</Button>
+            <TextBox x:Name="resultbox_Copy"  FontSize="15" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,10,5,29" BorderThickness="1,1,1,0"  />
+            <Menu Background="AliceBlue"  HorizontalAlignment="Left" Height="22" Margin="-10,-26,-22,0" VerticalAlignment="Top" Width="671" Grid.ColumnSpan="10">
+                <MenuItem Header="View" FontSize="12" FontWeight="DemiBold">
+                    <MenuItem Header="_Standart" Click="MenuItem_Click" >
+                        <MenuItem.Icon>
+                            <RadioButton/>
+
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Scientific" IsCheckable="True" Click="MenuItem_Click_1" ></MenuItem>
+
+
+
+
+
+                </MenuItem>
+
+
+            </Menu>
+
+
+
+        </Grid>
+    </Canvas>
+</Window>
