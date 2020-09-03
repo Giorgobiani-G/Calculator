@@ -97,13 +97,10 @@
             <TextBox x:Name="resultbox_Copy"  FontSize="15" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,10,5,29" BorderThickness="1,1,1,0"  />
             <Menu Background="AliceBlue"  HorizontalAlignment="Left" Height="22" Margin="-10,-26,-22,0" VerticalAlignment="Top" Width="671" Grid.ColumnSpan="10">
                 <MenuItem Header="View" FontSize="12" FontWeight="DemiBold">
-                    <MenuItem Header="_Standart" Click="MenuItem_Click" >
-                        <MenuItem.Icon>
-                            <RadioButton/>
-
-                        </MenuItem.Icon>
+                    <MenuItem Header="_Standart" Name="standart" IsCheckable="True"   Click="MenuItem_Click" >
+                        
                     </MenuItem>
-                    <MenuItem Header="_Scientific" IsCheckable="True" Click="MenuItem_Click_1" ></MenuItem>
+                    <MenuItem Header="_Scientific" Name="science" IsCheckable="True"   Click="MenuItem_Click_1" ></MenuItem>
 
 
 

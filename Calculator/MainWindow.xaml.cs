@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 
 namespace Calculator
 {
@@ -38,7 +26,7 @@ namespace Calculator
 
             resultbox.Text = "0";
 
-
+            
         }
 
 
@@ -315,8 +303,30 @@ namespace Calculator
 
         }
 
+
+
+        MenuItem menuItem1 = new MenuItem();
+        MenuItem menuItem2 = new MenuItem();
+       
+
+          
+
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+
+            menuItem1 = (MenuItem)sender;
+            
+            if (menuItem2.IsChecked)
+            {
+                menuItem2.IsChecked = false;
+                
+            }
+
+            menuItem1.IsChecked = true;
+
+
+
+
             this.Width = 356;
             Thickness m = resultbox.Margin;
             Thickness n = resultbox_Copy.Margin;
@@ -356,10 +366,27 @@ namespace Calculator
             Grid.SetColumn(min, 3);
 
 
+            SaveSettings();
+            GetSettings();
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
+            
+
+            menuItem2 = (MenuItem)sender;
+            if (menuItem1.IsChecked)
+            {
+                menuItem1.IsChecked = false;
+               
+            }
+
+
+            menuItem2.IsChecked = true;
+
+
+
+
             this.Width = 675;
             Thickness m = resultbox.Margin;
             Thickness n = resultbox_Copy.Margin;
@@ -395,7 +422,22 @@ namespace Calculator
             Grid.SetColumn(dec, 7);
             Grid.SetColumn(min, 8);
 
+            SaveSettings();
+            GetSettings();
+        }
 
+        public void GetSettings()
+        {
+            menuItem1.IsChecked =Properties.Settings.Default.menuItem1 ;
+            menuItem2.IsChecked = Properties.Settings.Default.menuItem2;
+        }
+
+        public void SaveSettings()
+
+        {
+            Properties.Settings.Default.menuItem1 = menuItem1.IsChecked;
+            Properties.Settings.Default.menuItem2 = menuItem2.IsChecked;
+            Properties.Settings.Default.Save();
         }
 
         private void Fact_Click(object sender, RoutedEventArgs e)
@@ -801,6 +843,8 @@ namespace Calculator
         {
             resultbox_Copy.Text =  resultbox_Copy.Text + resultbox.Text + ")";
         }
+
+       
 
         
     }
