@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,16 +21,25 @@ namespace Calculator
         bool nthpower = false;
         bool percentbutton = false;
 
+        MenuItem menuItem1 = new MenuItem();
+        MenuItem menuItem2 = new MenuItem();
+        
+        
+        
+
         public MainWindow()
         {
             InitializeComponent();
 
             resultbox.Text = "0";
+            
 
             
+
+
         }
 
-
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -305,16 +315,15 @@ namespace Calculator
 
 
 
-        MenuItem menuItem1 = new MenuItem();
-        MenuItem menuItem2 = new MenuItem();
-       
+        
 
-          
+      
+
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
-            menuItem1 = (MenuItem)sender;
+           menuItem1 = (MenuItem)sender;
             
             if (menuItem2.IsChecked)
             {
@@ -366,15 +375,18 @@ namespace Calculator
             Grid.SetColumn(min, 3);
 
 
-            SaveSettings();
-            GetSettings();
+           
+
         }
 
+        
+        
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            
 
-            menuItem2 = (MenuItem)sender;
+
+           menuItem2 = (MenuItem)sender;
+
             if (menuItem1.IsChecked)
             {
                 menuItem1.IsChecked = false;
@@ -422,23 +434,15 @@ namespace Calculator
             Grid.SetColumn(dec, 7);
             Grid.SetColumn(min, 8);
 
-            SaveSettings();
-            GetSettings();
+           
+                
+            
+
         }
 
-        public void GetSettings()
-        {
-            menuItem1.IsChecked =Properties.Settings.Default.menuItem1 ;
-            menuItem2.IsChecked = Properties.Settings.Default.menuItem2;
-        }
+        
 
-        public void SaveSettings()
-
-        {
-            Properties.Settings.Default.menuItem1 = menuItem1.IsChecked;
-            Properties.Settings.Default.menuItem2 = menuItem2.IsChecked;
-            Properties.Settings.Default.Save();
-        }
+        
 
         private void Fact_Click(object sender, RoutedEventArgs e)
         {

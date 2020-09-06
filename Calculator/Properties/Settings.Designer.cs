@@ -25,25 +25,23 @@ namespace Calculator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool menuItem1 {
+        public bool propertie {
             get {
-                return ((bool)(this["menuItem1"]));
+                return ((bool)(this["propertie"]));
             }
             set {
-                this["menuItem1"] = value;
+                this["propertie"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool menuItem2 {
+        public bool prop {
             get {
-                return ((bool)(this["menuItem2"]));
+                return ((bool)(this["prop"]));
             }
             set {
-                this["menuItem2"] = value;
+                this["prop"] = value;
             }
         }
     }
