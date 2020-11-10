@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,26 +22,28 @@ namespace Calculator
         bool nth = false;
         bool nthpower = false;
         bool percentbutton = false;
+        bool lftclicked = false;
+        bool rclicked = false;
 
         MenuItem menuItem1 = new MenuItem();
         MenuItem menuItem2 = new MenuItem();
-        
-        
-        
+
+
+
 
         public MainWindow()
         {
             InitializeComponent();
 
             resultbox.Text = "0";
-            
 
-            
+
+
 
 
         }
 
-        
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -60,10 +64,13 @@ namespace Calculator
             Button b = (Button)sender;
             resultbox.Text += b.Content;
 
+
+
             operationpressed = false;
             mathbuttonpressed = false;
             numburbuttonpressed = true;
-            
+            rclicked = false;
+
 
         }
 
@@ -72,7 +79,8 @@ namespace Calculator
 
         private void Operation_Click(object sender, RoutedEventArgs e)
         {
-            
+
+
             operationpressed = true;
             if (nth)
             {
@@ -87,40 +95,162 @@ namespace Calculator
 
             }
 
+
             if (numburbuttonpressed || mathbuttonpressed)
             {
 
-
+                string operation1 = "";  /*secvvale )gamo*/
 
                 if (resultbox_Copy.Text != "")
                 {
-
-                    Button c = (Button)sender;
-                    string operation1 = (string)c.Content;
-                    if (mathbuttonpressed)
+                    if (rclicked == false)
                     {
-                        resultbox_Copy.Text = resultbox_Copy.Text + " " + operation1;
 
+
+
+                        Button c = (Button)sender;
+                        operation1 = (string)c.Content;  /*sevcvale ) gamo*/
+                        if (mathbuttonpressed)
+                        {
+                            resultbox_Copy.Text = resultbox_Copy.Text + " " + operation1;
+
+
+                        }
+                        if (percentbutton)  /*percentbuttton*/
+                        {
+                            resultbox_Copy.Text = resultbox_Copy.Text + " " + operation1;
+                        }
+
+                        if (mathbuttonpressed == false) /*/*added*/ /*was written else */
+                        {
+                            resultbox_Copy.Text = resultbox_Copy.Text + " " + resultbox.Text + " " + operation1;
+                        }
 
                     }
-                    if (percentbutton)  /*percentbuttton*/
-                    {
-                        resultbox_Copy.Text = resultbox_Copy.Text + " " + operation1;
-                    }
 
-                    if (mathbuttonpressed==false) /*/*added*/ /*was written else */
-                    {
-                        resultbox_Copy.Text = resultbox_Copy.Text + " " + resultbox.Text + " " + operation1;
-                    }
 
-                    
+                    //int charLocation = resultbox_Copy.Text.IndexOf("(", 0);
+
 
 
                     string op;
+
+
+
+
                     if (result == 0 & operationpressed == false) /*davamate operationressed radgan 0 * 2 gamoived*/
                     {
                         op = resultbox.Text;
                     }
+
+                    string abc = resultbox_Copy.Text;
+                    int Count = 0;
+                    foreach (char c in abc)
+                    {
+                        if (c == '(')
+                        {
+                            Count++;
+                        }
+                    }
+                    int l = Count;
+                    bool left = l % 2 == 0;
+
+                    int Count1 = 0;
+                    foreach (char c in abc)
+                    {
+                        if (c == ')')
+                        {
+                            Count1++;
+                        }
+                    }
+                    int r = Count1;
+                    bool right = r % 2 == 0;
+
+                    Dictionary<string,string> st = new Dictionary<string, string>()
+                    { {"sqrt",double.Parse(resultbox.Text).ToString()},
+                      { "reciproc",(1/(double.Parse(resultbox.Text))).ToString()},
+                        //"fact",
+                        //"sin",
+                        //"cos",
+                        //"tan",
+                        //"sinh",
+                        //"cosh",
+                        //"tanh",
+                        //"exp",
+                        //"log",
+                        //"ln",
+                        //"powten",
+                        //"sqr",
+                        //"cube",
+                        //"cuberoot",
+                        //"^",
+                    };
+                    bool b = false;
+                    string currentmath="";
+                    for (int i = 0; i < st.Count; i++)
+                    {
+                        var item = st.ElementAt(i);
+                        var itemkey = item.Key;
+                        var itemvalue = item.Value;
+                        b = resultbox_Copy.Text.Contains(itemkey);
+                        if (b)
+                        {
+
+                           currentmath =  itemvalue.ToString(); 
+                            break;
+                            
+                        }
+                    }
+
+
+                    if (mathbuttonpressed == false && (lftclicked && rclicked || lftclicked && rclicked == false && resultbox_Copy.Text.Contains(")") && left == true && right == true || lftclicked && rclicked == false && resultbox_Copy.Text.Contains(")") && left == false && right == false || left == false && right == false&&mathbuttonpressed))
+                    {
+                        
+
+                        if (lftclicked && rclicked == false && resultbox_Copy.Text.Contains(")"))
+                        {
+                            int i = resultbox_Copy.Text.LastIndexOf("(");
+                            string sub = resultbox_Copy.Text.Substring(i); /*right part*/
+                            string sub1 = resultbox_Copy.Text.Substring(0, resultbox_Copy.Text.Length - sub.Length); /*Left part*/
+
+                            string ss = sub.Remove(sub.Length - 2);
+                            object ob = new System.Data.DataTable().Compute(ss, "");
+                            op = sub1 + ob.ToString();
+                            //if (b)
+                            //{
+                            //    op =  
+                            //}
+                        }
+                        else if (b)
+                        {
+                            int i = resultbox_Copy.Text.LastIndexOf("(");
+                            string sub = resultbox_Copy.Text.Substring(i);
+                            string ss = sub.Remove(sub.Length - 2);
+
+                            op = currentmath + operation + sub;
+                            if (op.Contains(","))
+                            {
+                                op = op.Replace(",", ".");
+                            }
+                            object obj = new System.Data.DataTable().Compute(op, "");
+                            obj.ToString();
+
+                        }
+                        else
+                        {
+                            object obj = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
+
+                            op = obj.ToString();
+                        }
+
+
+
+
+                    }
+
+
+
+
                     else
                     {
                         op = result.ToString() + operation + resultbox.Text;
@@ -131,6 +261,13 @@ namespace Calculator
                         op = op.Replace(",", ".");
                     }
 
+
+                    //if (b)
+                    //{
+                    //    op = result.ToString() + operation + resultbox.Text;
+                    //    object ob = new System.Data.DataTable().Compute(op, "");
+                    //    ob.ToString();
+                    //}
 
                     object oper = new System.Data.DataTable().Compute(op, "");
 
@@ -161,22 +298,30 @@ namespace Calculator
                     operation = operation2;
 
                 }
+                else if (resultbox_Copy.Text.Length - 1 > 0 && rclicked || resultbox_Copy.Text.Length - 1 > 0 && rclicked)   /*)gamo*/
+                {
+                    resultbox_Copy.Text = resultbox_Copy.Text + operation2;
+                    operation = operation2;
+
+                }
+
                 else
-                { 
-                resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 1, 1) + operation2;
-                operation = operation2;
+                {
+                    resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 1, 1) + operation2;
+                    operation = operation2;
                 }
                 //resultbox_Copy.Text = resultbox_Copy.Text + " " + operation2 + " ";
             }
 
             mathbuttonpressed = false;
-            
+
             numburbuttonpressed = false;
             nth = false;
             nthpower = false;
             percentbutton = false;
-            
-       #region
+
+
+            #region
 
 
         }
@@ -212,6 +357,8 @@ namespace Calculator
             nth = false;
             nthpower = false;
             operation = "";
+            rclicked = false;
+            lftclicked = false;
         }
 
         private void Backspace_Click(object sender, RoutedEventArgs e)
@@ -246,46 +393,79 @@ namespace Calculator
         {
 
             operationpressed = true;
-            //resultbox_Copy.Text = string.Empty;
-            switch (operation)
+            if (lftclicked)
             {
-                case "+":
-                    resultbox.Text = (result + double.Parse(resultbox.Text)).ToString();
-                    break;
-                case "-":
-                    resultbox.Text = (result - double.Parse(resultbox.Text)).ToString();
-                    break;
-                case "/":
-                    resultbox.Text = (result / double.Parse(resultbox.Text)).ToString();
-                    break;
-                case "*":
-                    resultbox.Text = (result * double.Parse(resultbox.Text)).ToString();
-                    break;
+
+                string sub = "";
+                //int i = resultbox_Copy.Text.LastIndexOf("(");
+                if (rclicked)
+                {
+                    sub = resultbox_Copy.Text;
+                }
+                else
+                {
+                    sub = resultbox_Copy.Text + resultbox.Text; /*right part*/
+                }
+
+                /*string sub1 = resultbox_Copy.Text.Substring(0, resultbox_Copy.Text.Length - sub.Length);*/ /*Left part*/
 
 
-
-                default:
-
-                    break;
-
+                object ob = new System.Data.DataTable().Compute(sub, "");
+                if (ob.ToString() != "")
+                {
 
 
+                    resultbox.Text = ob.ToString();
+
+                    resultbox_Copy.Text = string.Empty;
+                    backspaceallowed = false;
+                    operation = "";
+                }
             }
 
-            if (nth)
-            {
-                Nthroot_Click(sender, e);
-            }
-            if (nthpower)
-            {
-                Npow_Click(sender, e);
-            }
-            resultbox_Copy.Text = string.Empty;
-            backspaceallowed = false;
-            operation = "";
 
-            result = 0;
+            else
+            {
+                //resultbox_Copy.Text = string.Empty;
+                switch (operation)
+                {
+                    case "+":
+                        resultbox.Text = (result + double.Parse(resultbox.Text)).ToString();
+                        break;
+                    case "-":
+                        resultbox.Text = (result - double.Parse(resultbox.Text)).ToString();
+                        break;
+                    case "/":
+                        resultbox.Text = (result / double.Parse(resultbox.Text)).ToString();
+                        break;
+                    case "*":
+                        resultbox.Text = (result * double.Parse(resultbox.Text)).ToString();
+                        break;
 
+
+
+                    default:
+
+                        break;
+
+
+
+                }
+
+                if (nth)
+                {
+                    Nthroot_Click(sender, e);
+                }
+                if (nthpower)
+                {
+                    Npow_Click(sender, e);
+                }
+                resultbox_Copy.Text = string.Empty;
+                backspaceallowed = false;
+                operation = "";
+
+                result = 0;
+            }
         }
 
 
@@ -315,20 +495,20 @@ namespace Calculator
 
 
 
-        
 
-      
+
+
 
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
-           menuItem1 = (MenuItem)sender;
-            
+            menuItem1 = (MenuItem)sender;
+
             if (menuItem2.IsChecked)
             {
                 menuItem2.IsChecked = false;
-                
+
             }
 
             menuItem1.IsChecked = true;
@@ -375,22 +555,22 @@ namespace Calculator
             Grid.SetColumn(min, 3);
 
 
-           
+
 
         }
 
-        
-        
+
+
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
 
 
-           menuItem2 = (MenuItem)sender;
+            menuItem2 = (MenuItem)sender;
 
             if (menuItem1.IsChecked)
             {
                 menuItem1.IsChecked = false;
-               
+
             }
 
 
@@ -434,15 +614,15 @@ namespace Calculator
             Grid.SetColumn(dec, 7);
             Grid.SetColumn(min, 8);
 
-           
-                
-            
+
+
+
 
         }
 
-        
 
-        
+
+
 
         private void Fact_Click(object sender, RoutedEventArgs e)
         {
@@ -639,41 +819,41 @@ namespace Calculator
             if (resultbox_Copy.Text != "0")
             {
 
-            
-            
 
-            if (numburbuttonpressed& resultbox_Copy.Text == "")
-            {
-                resultbox_Copy.Text = "0";
-                resultbox.Text = "0";
 
-            }
-            else
-            {
-                string substring = resultbox_Copy.Text.Substring(resultbox_Copy.Text.Length - 1, 1);
-                resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 2, 2);
-                if (resultbox_Copy.Text.Contains(","))
+
+                if (numburbuttonpressed & resultbox_Copy.Text == "")
                 {
-                    resultbox_Copy.Text = resultbox_Copy.Text.Replace(",", ".");
+                    resultbox_Copy.Text = "0";
+                    resultbox.Text = "0";
+
                 }
-                object oper = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
-                string op = oper.ToString();
-                double bb = double.Parse(op);
-                //double d = double.Parse(resultbox_Copy.Text);
-
-                resultbox.Text = (double.Parse(resultbox.Text).ToString());
-                double result = (bb * double.Parse(resultbox.Text)) / 100;
-
-                resultbox_Copy.Text += " " + substring + " " + result.ToString();
-
-                resultbox.Text = result.ToString();
-                if (operationpressed)
+                else
                 {
-                    int num = resultbox_Copy.Text.IndexOf(operation);
-                    resultbox_Copy.Text.Remove(num, num);
+                    string substring = resultbox_Copy.Text.Substring(resultbox_Copy.Text.Length - 1, 1);
+                    resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 2, 2);
+                    if (resultbox_Copy.Text.Contains(","))
+                    {
+                        resultbox_Copy.Text = resultbox_Copy.Text.Replace(",", ".");
+                    }
+                    object oper = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
+                    string op = oper.ToString();
+                    double bb = double.Parse(op);
+                    //double d = double.Parse(resultbox_Copy.Text);
+
+                    resultbox.Text = (double.Parse(resultbox.Text).ToString());
+                    double result = (bb * double.Parse(resultbox.Text)) / 100;
+
+                    resultbox_Copy.Text += " " + substring + " " + result.ToString();
+
+                    resultbox.Text = result.ToString();
+                    if (operationpressed)
+                    {
+                        int num = resultbox_Copy.Text.IndexOf(operation);
+                        resultbox_Copy.Text.Remove(num, num);
+                    }
+
                 }
-                
-            }
 
             }
 
@@ -683,18 +863,18 @@ namespace Calculator
 
 
         double d;
-        
+
         public void Nthroot_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+
+
             mathbuttonpressed = true;
             //if (nthpower&numburbuttonpressed==false)
             //{
             //    string st = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 1);
             //    resultbox_Copy.Text = st + "yroot";
             //}
-            
+
             //if (numburbuttonpressed == false & operationpressed)  /*correction*/
             //{
             //    resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 2, 2);
@@ -703,10 +883,10 @@ namespace Calculator
             //}  comentarebi davamatet test 
             //comments has been added
 
-            if (numburbuttonpressed||nth==false)
+            if (numburbuttonpressed || nth == false)
             {
 
-                
+
 
 
                 if (operationpressed)
@@ -730,7 +910,7 @@ namespace Calculator
                     resultbox_Copy.Text = resultbox_Copy.Text;
 
                 }
-                
+
 
 
 
@@ -738,34 +918,34 @@ namespace Calculator
 
 
                 if (nth)
-            {
-                
-                double n = 0;
-                n = double.Parse(resultbox.Text);
-                double dd = Math.Pow(d, (1.0 /  n));
-                resultbox.Text = dd.ToString();
-                
-            }
-            d = double.Parse(resultbox.Text);
+                {
+
+                    double n = 0;
+                    n = double.Parse(resultbox.Text);
+                    double dd = Math.Pow(d, (1.0 / n));
+                    resultbox.Text = dd.ToString();
+
+                }
+                d = double.Parse(resultbox.Text);
 
             }
 
             #endregion
 
             string sub = resultbox_Copy.Text.Substring(resultbox_Copy.Text.Length - 5, 5);
-            
+
             if (operationpressed & sub == "yroot")
             {
-                resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length-6, 6);
+                resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 6, 6);
             }
 
             backspaceallowed = false;
 
             nth = true;
             numburbuttonpressed = false;
-                
 
-            
+
+
         }
 
 
@@ -773,7 +953,7 @@ namespace Calculator
         private void Npow_Click(object sender, RoutedEventArgs e)
         {
             mathbuttonpressed = true;
-            if (numburbuttonpressed||nthpower==false)
+            if (numburbuttonpressed || nthpower == false)
             {
 
                 if (operationpressed)
@@ -811,14 +991,14 @@ namespace Calculator
 
 
                 if (nthpower)
-            {
-                
-                double n = 0;
-                n = double.Parse(resultbox.Text);
-                double dd = Math.Pow(p,n);
-                resultbox.Text = dd.ToString();
-            }
-            
+                {
+
+                    double n = 0;
+                    n = double.Parse(resultbox.Text);
+                    double dd = Math.Pow(p, n);
+                    resultbox.Text = dd.ToString();
+                }
+
                 p = double.Parse(resultbox.Text);
 
             }
@@ -830,7 +1010,7 @@ namespace Calculator
                 resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 2, 2);
             }
 
-            
+
 
 
             backspaceallowed = false;
@@ -838,21 +1018,72 @@ namespace Calculator
             numburbuttonpressed = false;
         }
 
+
+
         private void Lft_Click(object sender, RoutedEventArgs e)
         {
-            resultbox_Copy.Text = "(";
+            lftclicked = true;
+            resultbox_Copy.Text = resultbox_Copy.Text + "(";
+
+            if (mathbuttonpressed)
+            {
+                resultbox_Copy.Text = "(" + resultbox_Copy.Text;
+            }
         }
 
         private void Right_Click(object sender, RoutedEventArgs e)
         {
-            resultbox_Copy.Text =  resultbox_Copy.Text + resultbox.Text + ")";
+
+            if (numburbuttonpressed)
+            {
+
+
+
+                if (lftclicked & rclicked != true)
+                {
+                    resultbox_Copy.Text = resultbox_Copy.Text + resultbox.Text + ")";
+
+
+
+
+                    rclicked = true;
+
+                    //List<string> st = new List<string>() { "sqrt", "reciproc", "fact", "sin", "cos", "tan", "sinh", "cosh", "tanh", "exp", "log", "ln", "powten", "sqr", "cube", "cuberoot", "^" };
+                    //bool b = false;
+                    //for (int i = 0; i < st.Count; i++)
+                    //{
+                    //    b = resultbox_Copy.Text.Contains(st[i]);
+                    //    if (b)
+                    //    {
+                    //        break;
+                    //    }
+                    //}
+
+
+                    //string op;
+
+                    //if (b )
+                    //{
+                        
+
+                    //        op = result.ToString() + operation + resultbox.Text;
+                    //    object ob = new System.Data.DataTable().Compute(op, "");
+                    //    ob.ToString();
+                        
+                    //}
+
+                    Operation_Click(sender, e);
+                }
+            }
+
         }
 
-       
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
 
-        
+        }
     }
 
-    
+
 }
 

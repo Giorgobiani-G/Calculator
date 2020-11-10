@@ -43,7 +43,8 @@
             <Button Grid.Row="2" Grid.Column="0" FontSize="40" Margin="5"></Button>
             <Button x:Name="sinh" Grid.Row="2" Grid.Column="1" FontSize="25" Margin="5" Click="Sinh_Click">sinh</Button>
             <Button x:Name="sin" Grid.Row="2" Grid.Column="2" FontSize="25" Margin="5" RenderTransformOrigin="0.333,0.212" Click="Sin_Click" >sin</Button>
-            <Button x:Name="twopower" Grid.Row="2" Grid.Column="3" FontSize="25" Margin="5" Click="Twopower_Click">x²</Button> <!--x symbol + alt +0178-->
+            <Button x:Name="twopower" Grid.Row="2" Grid.Column="3" FontSize="25" Margin="5" Click="Twopower_Click">x²</Button>
+            <!--x symbol + alt +0178-->
             <Button x:Name="fact" Grid.Row="2" Grid.Column="4" FontSize="25" Margin="5" Click="Fact_Click">n!</Button>
             <Button Grid.Row="3" Grid.Column="0" FontSize="15" Margin="5"></Button>
             <Button x:Name="cosh" Grid.Row="3" Grid.Column="1" FontSize="23" Margin="5" Click="Cosh_Click">cosh</Button>
@@ -58,7 +59,7 @@
             <Button Grid.Row="5" Grid.Column="0" FontSize="25" Margin="5" />
             <!--&#119910;-->
             <Button x:Name="exp" Grid.Row="5" Grid.Column="1" FontSize="25" Margin="5" Click="Exp_Click">Exp</Button>
-            <Button Grid.Row="5" Grid.Column="2" FontSize="23" Margin="5">Mod</Button>
+            <Button Grid.Row="5" Grid.Column="2" FontSize="23" Margin="5" Click="Button_Click_3">Mod</Button>
             <Button x:Name="log" Grid.Row="5" Grid.Column="3" FontSize="25" Margin="5" Click="Log_Click">log</Button>
             <Button x:Name="powten" Grid.Row="5" Grid.Column="4" FontSize="25" Margin="5" Click="Powten_Click">10&#x02E3;</Button>
 
@@ -86,7 +87,8 @@
                         <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
                         <GradientStop Color="#FFCDCDCD" Offset="1"/>
                     </LinearGradientBrush>
-                </Button.Background> 6</Button>
+                </Button.Background> 6
+            </Button>
             <Button x:Name="_0" Grid.Row="5" Grid.Column="5" FontSize="25" Grid.ColumnSpan="2" Margin="5" Click="Button_Click">0</Button>
             <Button x:Name="dec" Grid.Row="5" Grid.Column="7" FontSize="25" Margin="5" Click="Button_Click_2">,</Button>
             <Button x:Name="_3" Grid.Row="4" Grid.Column="7" FontSize="25" Margin="5" Click="Button_Click">3</Button>
@@ -98,7 +100,7 @@
             <Menu Background="AliceBlue"  HorizontalAlignment="Left" Height="22" Margin="-10,-26,-22,0" VerticalAlignment="Top" Width="671" Grid.ColumnSpan="10">
                 <MenuItem Header="View" FontSize="12" FontWeight="DemiBold">
                     <MenuItem Header="_Standart" Name="standart" IsCheckable="True" IsChecked="True"  Checked="MenuItem_Click" Click="MenuItem_Click" >
-                        
+
                     </MenuItem>
                     <MenuItem Header="_Scientific" Name="science" IsCheckable="True"   Click="MenuItem_Click_1" ></MenuItem>
 
