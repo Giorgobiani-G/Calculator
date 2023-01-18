@@ -43,7 +43,7 @@ namespace Calculator
             if (mathbuttonPressed & nth == false & mathbuttonPressed & nthPower == false)
                 resultbox_Copy.Text = "";
 
-            Button b = (Button)sender;
+            var b = (Button)sender;
             resultbox.Text += b.Content;
 
             operationPressed = false;
@@ -68,14 +68,13 @@ namespace Calculator
 
             if (numberButtonPressed || mathbuttonPressed)
             {
-
                 var operation1 = "";
 
                 if (resultbox_Copy.Text != "")
                 {
                     if (rgtClicked == false)
                     {
-                        Button c = (Button)sender;
+                        var c = (Button)sender;
 
                         operation1 = (string)c.Content;
 
@@ -136,21 +135,6 @@ namespace Calculator
                     {
                       {"sqrt",double.Parse(resultbox.Text).ToString()},
                       { "reciproc",(1/(double.Parse(resultbox.Text))).ToString()},
-                        //"fact",
-                        //"sin",
-                        //"cos",
-                        //"tan",
-                        //"sinh",
-                        //"cosh",
-                        //"tanh",
-                        //"exp",
-                        //"log",
-                        //"ln",
-                        //"powten",
-                        //"sqr",
-                        //"cube",
-                        //"cuberoot",
-                        //"^",
                     };
 
                     var b = false;
@@ -163,6 +147,7 @@ namespace Calculator
                         var itemKey = item.Key;
                         var itemValue = item.Value;
                         b = resultbox_Copy.Text.Contains(itemKey);
+
                         if (b)
                         {
                             currentMath = itemValue.ToString();
@@ -194,14 +179,14 @@ namespace Calculator
                                 op = op.Replace(",", ".");
                             }
 
-                            object obj = new System.Data.DataTable().Compute(op, "");
+                            var obj = new System.Data.DataTable().Compute(op, "");
 
                             obj.ToString();
                         }
 
                         else
                         {
-                            object obj = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
+                            var obj = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
                             op = obj.ToString();
                         }
                     }
@@ -216,7 +201,7 @@ namespace Calculator
                         op = op.Replace(",", ".");
                     }
 
-                    object oper = new System.Data.DataTable().Compute(op, "");
+                    var oper = new System.Data.DataTable().Compute(op, "");
 
                     resultbox.Text = oper.ToString();
                     result = double.Parse(resultbox.Text);
@@ -262,7 +247,6 @@ namespace Calculator
             nth = false;
             nthPower = false;
             percentButton = false;
-
             #region
         }
 
@@ -277,9 +261,10 @@ namespace Calculator
         {
             if (!resultbox.Text.Contains(","))
             {
-                string st = resultbox.Text;
-                string st1 = ",";
+                var st = resultbox.Text;
+                var st1 = ",";
                 resultbox.Text = st + st1;
+
                 if (operationPressed)
                 {
                     resultbox.Text = "0" + st1;
@@ -339,7 +324,7 @@ namespace Calculator
                     sub = resultbox_Copy.Text + resultbox.Text; /*right part*/
                 }
 
-                object ob = new System.Data.DataTable().Compute(sub, "");
+                var ob = new System.Data.DataTable().Compute(sub, "");
 
                 if (ob.ToString() != "")
                 {
@@ -349,7 +334,6 @@ namespace Calculator
                     operation = "";
                 }
             }
-
 
             else
             {
@@ -410,13 +394,6 @@ namespace Calculator
             mathbuttonPressed = true;
         }
 
-
-
-
-
-
-
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             menuItem1 = (MenuItem)sender;
@@ -429,8 +406,8 @@ namespace Calculator
             menuItem1.IsChecked = true;
 
             this.Width = 356;
-            Thickness m = resultbox.Margin;
-            Thickness n = resultbox_Copy.Margin;
+            var m = resultbox.Margin;
+            var n = resultbox_Copy.Margin;
             n.Right = 69;
             m.Right = 69;
             resultbox_Copy.Margin = n;
@@ -476,8 +453,8 @@ namespace Calculator
             menuItem2.IsChecked = true;
 
             this.Width = 675;
-            Thickness m = resultbox.Margin;
-            Thickness n = resultbox_Copy.Margin;
+            var m = resultbox.Margin;
+            var n = resultbox_Copy.Margin;
             n.Right = 5;
             m.Right = 5;
             resultbox_Copy.Margin = n;
@@ -517,12 +494,12 @@ namespace Calculator
                 resultbox_Copy.Text = resultbox_Copy.Text + "fact" + "(" + resultbox.Text + ")";
                 if (resultbox.Text.Contains(","))
                 {
-                    double b = MathNet.Numerics.SpecialFunctions.Gamma(double.Parse(resultbox.Text) + 1);
+                    var b = MathNet.Numerics.SpecialFunctions.Gamma(double.Parse(resultbox.Text) + 1);
                     resultbox.Text = b.ToString();
                 }
                 else
                 {
-                    double d = MathNet.Numerics.SpecialFunctions.Factorial(int.Parse(resultbox.Text));
+                    var d = MathNet.Numerics.SpecialFunctions.Factorial(int.Parse(resultbox.Text));
                     resultbox.Text = d.ToString();
                 }
             }
@@ -539,7 +516,7 @@ namespace Calculator
         private void Sin_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "sin" + "(" + resultbox.Text + ")";
-            double sin = Math.PI * double.Parse(resultbox.Text) / 180;
+            var sin = Math.PI * double.Parse(resultbox.Text) / 180;
 
             resultbox.Text = Math.Sin(sin).ToString();
             backspaceAllowed = false;
@@ -549,7 +526,7 @@ namespace Calculator
         private void Cos_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "cos" + "(" + resultbox.Text + ")";
-            double cos = Math.PI * double.Parse(resultbox.Text) / 180;
+            var cos = Math.PI * double.Parse(resultbox.Text) / 180;
 
             resultbox.Text = Math.Cos(cos).ToString();
             backspaceAllowed = false;
@@ -559,7 +536,7 @@ namespace Calculator
         private void Tan_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "tan" + "(" + resultbox.Text + ")";
-            double tan = Math.PI * double.Parse(resultbox.Text) / 180;
+            var tan = Math.PI * double.Parse(resultbox.Text) / 180;
 
             resultbox.Text = Math.Tan(tan).ToString();
             backspaceAllowed = false;
@@ -569,7 +546,7 @@ namespace Calculator
         private void Sinh_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "sinh" + "(" + resultbox.Text + ")";
-            double sinh = double.Parse(resultbox.Text);
+            var sinh = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Sinh(sinh).ToString();
             backspaceAllowed = false;
@@ -579,18 +556,17 @@ namespace Calculator
         private void Cosh_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "cosh" + "(" + resultbox.Text + ")";
-            double cosh = double.Parse(resultbox.Text);
+            var cosh = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Cosh(cosh).ToString();
             backspaceAllowed = false;
             mathbuttonPressed = true;
-
         }
 
         private void Tanh_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "tanh" + "(" + resultbox.Text + ")";
-            double tanh = double.Parse(resultbox.Text);
+            var tanh = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Tanh(tanh).ToString();
             backspaceAllowed = false;
@@ -600,7 +576,7 @@ namespace Calculator
         private void Exp_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "exp" + "(" + resultbox.Text + ")";
-            double exp = double.Parse(resultbox.Text);
+            var exp = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Exp(exp).ToString();
             backspaceAllowed = false;
@@ -610,7 +586,7 @@ namespace Calculator
         private void Log_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "log" + "(" + resultbox.Text + ")";
-            double log10 = double.Parse(resultbox.Text);
+            var log10 = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Log10(log10).ToString();
             backspaceAllowed = false;
@@ -620,7 +596,7 @@ namespace Calculator
         private void Ln_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "ln" + "(" + resultbox.Text + ")";
-            double ln = double.Parse(resultbox.Text);
+            var ln = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Log(ln).ToString();
             backspaceAllowed = false;
@@ -630,7 +606,7 @@ namespace Calculator
         private void Powten_Click(object sender, RoutedEventArgs e)
         {
             resultbox_Copy.Text = resultbox_Copy.Text + "powten" + "(" + resultbox.Text + ")";
-            double pow = double.Parse(resultbox.Text);
+            var pow = double.Parse(resultbox.Text);
 
             resultbox.Text = Math.Pow(10, pow).ToString();
             backspaceAllowed = false;
@@ -688,11 +664,13 @@ namespace Calculator
                 {
                     string substring = resultbox_Copy.Text.Substring(resultbox_Copy.Text.Length - 1, 1);
                     resultbox_Copy.Text = resultbox_Copy.Text.Remove(resultbox_Copy.Text.Length - 2, 2);
+
                     if (resultbox_Copy.Text.Contains(","))
                     {
                         resultbox_Copy.Text = resultbox_Copy.Text.Replace(",", ".");
                     }
-                    object oper = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
+
+                    var oper = new System.Data.DataTable().Compute(resultbox_Copy.Text, "");
                     string op = oper.ToString();
                     double bb = double.Parse(op);
 
@@ -712,8 +690,6 @@ namespace Calculator
 
             percentButton = true;
         }
-
-
 
         double d;
 
