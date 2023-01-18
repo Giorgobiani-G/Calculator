@@ -30,7 +30,7 @@
                 <RowDefinition></RowDefinition>
 
             </Grid.RowDefinitions>
-            <TextBox x:Name="resultbox" Text="0"   FontSize="20" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,20,5,0" BorderThickness="1,0,1,1"  RenderTransformOrigin="0.503,0.425"/>
+            <TextBox x:Name="resultbox" Text="0" IsReadOnly="True"  FontSize="20" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,20,5,0" BorderThickness="1,0,1,1"  RenderTransformOrigin="0.503,0.425"/>
 
             <Button x:Name="tt" Grid.Row="1" Grid.Column="0" FontSize="40" Margin="5" Visibility="Visible"></Button>
             <Button Grid.Row="1" Grid.Column="1" FontSize="40" Margin="5"></Button>
@@ -96,7 +96,7 @@
             <Button x:Name="pow" Grid.Row="3" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click">*</Button>
             <Button x:Name="plus" Grid.Row="4" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click">+</Button>
             <Button x:Name="min" Grid.Row="5" Grid.Column="8" FontSize="25" Margin="5" Click="Operation_Click">-</Button>
-            <TextBox x:Name="resultbox_Copy"  FontSize="15" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,10,5,29" BorderThickness="1,1,1,0"  />
+            <TextBox x:Name="resultbox_Copy" IsReadOnly="True"  FontSize="15" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.ColumnSpan="10" Margin="5,10,5,29" BorderThickness="1,1,1,0"  />
             <Menu Background="AliceBlue"  HorizontalAlignment="Left" Height="22" Margin="-10,-26,-22,0" VerticalAlignment="Top" Width="671" Grid.ColumnSpan="10">
                 <MenuItem Header="View" FontSize="12" FontWeight="DemiBold">
                     <MenuItem Header="_Standart" Name="standart" IsCheckable="True" IsChecked="True"  Checked="MenuItem_Click" Click="MenuItem_Click" >
